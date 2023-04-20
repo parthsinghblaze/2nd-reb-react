@@ -1,4 +1,14 @@
-export const productList = [
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let products = [
     {
         id: 1,
         name: "Samsung Galaxy A10",
@@ -20,3 +30,12 @@ export const productList = [
         desp: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit totam doloribus voluptatibus, animi esse suscipit sequi ipsam, officiis in harum sint neque quisquam libero itaque aperiam iusto commodi cumque ut?"
     }
 ]
+
+    let findElement = 4
+
+    const filterItem = products.find((item) => item.id === findElement)
+
+    console.log(filterItem)
+    </script>
+</body>
+</html>

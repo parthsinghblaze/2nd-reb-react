@@ -27,6 +27,11 @@ function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to="/cocktails">
+                Cocktails
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to="/products">
                 Products
               </Link>
