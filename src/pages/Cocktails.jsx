@@ -4,15 +4,18 @@ import { Link } from "react-router-dom";
 function Cocktails() {
   const [cocktailList, setCocktailList] = useState([]);
   const [loading, setIsLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
-    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`)
+    fetch(
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchValue}`
+    )
       .then((resp) => resp.json())
       .then((data) => {
         setCocktailList(data.drinks);
         setIsLoading(false);
       });
-  }, []);
+  }, [searchValue]);
 
   if (loading) {
     return (
@@ -81,6 +84,12 @@ function Cocktails() {
   return (
     <div className="container py-5">
       <h2>Cocktail List</h2>
+      <input
+        value={searchValue}
+        placeholder="Search your drinks..."
+        className="form-control"
+        onChange={(e) => setSearchValue(e.target.value)}
+      />
       <hr />
       {/* {loading && <h1>Loading....</h1>} */}
       <div className="row">
@@ -94,7 +103,7 @@ function Cocktails() {
           } = item;
 
           return (
-            <div className="col-md-4 col-6 mb-3">
+            <div className="col-md-4 col-6 mb-3" key={idDrink}>
               <div className="card">
                 <img src={strDrinkThumb} alt="" />
                 <div className="card-body">
