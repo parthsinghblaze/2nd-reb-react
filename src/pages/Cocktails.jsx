@@ -94,7 +94,7 @@ function Cocktails() {
           } = item;
 
           return (
-            <div className="col-md-4 mb-3">
+            <div className="col-md-4 col-6 mb-3">
               <div className="card">
                 <img src={strDrinkThumb} alt="" />
                 <div className="card-body">
