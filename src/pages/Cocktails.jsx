@@ -81,6 +81,8 @@ function Cocktails() {
     );
   }
 
+  console.log("cocktailList", cocktailList);
+
   return (
     <div className="container py-5">
       <h2>Cocktail List</h2>
@@ -93,34 +95,36 @@ function Cocktails() {
       <hr />
       {/* {loading && <h1>Loading....</h1>} */}
       <div className="row">
-        {cocktailList.map((item) => {
-          const {
-            idDrink,
-            strDrinkThumb,
-            strDrink,
-            strCategory,
-            strInstructions,
-          } = item;
+        {cocktailList === null && <h2>No Cocktail found!</h2>}
+        {cocktailList &&
+          cocktailList.map((item) => {
+            const {
+              idDrink,
+              strDrinkThumb,
+              strDrink,
+              strCategory,
+              strInstructions,
+            } = item;
 
-          return (
-            <div className="col-md-4 col-6 mb-3" key={idDrink}>
-              <div className="card">
-                <img src={strDrinkThumb} alt="" />
-                <div className="card-body">
-                  <h5>{strDrink}</h5>
-                  <span className="text-secondary">{strCategory}</span>
-                  <p className="text-truncate">{strInstructions}</p>
-                  <Link
-                    to={`/cocktails/${idDrink}`}
-                    className="btn btn-secondary"
-                  >
-                    More Details
-                  </Link>
+            return (
+              <div className="col-md-4 col-6 mb-3" key={idDrink}>
+                <div className="card">
+                  <img src={strDrinkThumb} alt="" />
+                  <div className="card-body">
+                    <h5>{strDrink}</h5>
+                    <span className="text-secondary">{strCategory}</span>
+                    <p className="text-truncate">{strInstructions}</p>
+                    <Link
+                      to={`/cocktails/${idDrink}`}
+                      className="btn btn-secondary"
+                    >
+                      More Details
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </div>
   );

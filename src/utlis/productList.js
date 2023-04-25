@@ -7,7 +7,7 @@ export const productList = [
     {
         id: 2,
         name: "Iphone 14",
-        desp: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit totam doloribus voluptatibus, animi esse suscipit sequi ipsam, officiis in harum sint neque quisquam libero itaque aperiam iusto commodi cumque ut?"
+        desp: "samsung apple"
     },
     {
         id: 3,
