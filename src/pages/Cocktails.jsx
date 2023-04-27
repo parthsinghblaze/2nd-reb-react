@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { WrapperContext } from "../App";
 
 function Cocktails() {
   const [cocktailList, setCocktailList] = useState([]);
   const [loading, setIsLoading] = useState(true);
-  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
+
+  const { searchFormValue } = useContext(WrapperContext);
 
   useEffect(() => {
     fetch(
-      `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchValue}`
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchFormValue}`
     )
       .then((resp) => resp.json())
       .then((data) => {
         setCocktailList(data.drinks);
         setIsLoading(false);
       });
-  }, [searchValue]);
+  }, [searchFormValue]);
 
   if (loading) {
     return (
@@ -81,17 +84,15 @@ function Cocktails() {
     );
   }
 
-  console.log("cocktailList", cocktailList);
-
   return (
     <div className="container py-5">
       <h2>Cocktail List</h2>
-      <input
+      {/* <input
         value={searchValue}
         placeholder="Search your drinks..."
         className="form-control"
         onChange={(e) => setSearchValue(e.target.value)}
-      />
+      /> */}
       <hr />
       {/* {loading && <h1>Loading....</h1>} */}
       <div className="row">
@@ -114,12 +115,21 @@ function Cocktails() {
                     <h5>{strDrink}</h5>
                     <span className="text-secondary">{strCategory}</span>
                     <p className="text-truncate">{strInstructions}</p>
-                    <Link
+                    {/* <Link
                       to={`/cocktails/${idDrink}`}
                       className="btn btn-secondary"
                     >
                       More Details
-                    </Link>
+                    </Link> */}
+                    <button
+                      onClick={() =>
+                        navigate(`/cocktails/${idDrink}`, { state: item })
+                      }
+                      // to={`/cocktails/${idDrink}`}
+                      className="btn btn-secondary"
+                    >
+                      More Details
+                    </button>
                   </div>
                 </div>
               </div>

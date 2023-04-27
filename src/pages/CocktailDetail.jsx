@@ -1,24 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { IoArrowBackSharp } from "react-icons/io5";
 
 function CocktailDetail() {
   const params = useParams();
 
   const [cocktailDetail, setCocktailDetail] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  const { state } = useLocation();
+
+  console.log("location data", state);
 
   useEffect(() => {
-    fetch(
-      `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${params.id}`
-    )
-      .then((resp) => resp.json())
-      .then((data) => {
-        setCocktailDetail(data.drinks[0]);
-        setLoading(false);
-      })
-      .catch((e) => console.log("e", e));
-  }, []);
+    setCocktailDetail(state);
+  }, [state]);
+
+  // useEffect(() => {
+  //   fetch(
+  //     `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${params.id}`
+  //   )
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       setCocktailDetail(data.drinks[0]);
+  //       setLoading(false);
+  //     })
+  //     .catch((e) => console.log("e", e));
+  // }, []);
 
   if (loading) {
     return (
