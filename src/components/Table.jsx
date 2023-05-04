@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { WrapperContext } from "../App";
 
 function Table() {
-  const { tableData } = useContext(WrapperContext);
+  const { tableData, deleteData, addToEditStage } = useContext(WrapperContext);
 
   return (
     <div className="container">
@@ -18,7 +18,7 @@ function Table() {
         </thead>
         <tbody>
           {tableData.map((item, index) => {
-            const { firstName, lastName, city } = item;
+            const { firstName, lastName, city, id } = item;
 
             return (
               <tr key={index}>
@@ -27,8 +27,18 @@ function Table() {
                 <td> {lastName} </td>
                 <td> {city} </td>
                 <td>
-                  <button className="btn btn-danger">Delete</button>
-                  <button className="btn btn-warning">Edit</button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteData(id)}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className="btn btn-warning"
+                    onClick={() => addToEditStage(item)}
+                  >
+                    Edit
+                  </button>
                 </td>
               </tr>
             );

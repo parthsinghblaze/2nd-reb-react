@@ -9,18 +9,59 @@
 <body>
     <script>
 
-        console.log("Hello 1")
-        console.log("Hello 1")
-        console.log("Hello 1")
-        for(let i = 0; i <= 1000; i++) {
-            console.log("Hello 4567890")
-        }
-        console.log("Hello 1")
-        console.log("Hello 1")
-        console.log("Hello 1")
+        const product = [
+            {
+                id: 1,
+                name: 'xyz'
+            },
+            {
+                id: 2,
+                name: 'abc'
+            },
+            {
+                id: 3,
+                name: 'def'
+            },
+            {
+                id: 4,
+                name: 'pqr'
+            },
+            {
+                id: 5,
+                name: 'mno'
+            },
+        ] 
 
-        // let date = new Date()
-        // console.log(date.toLocaleTimeString())
+        const editedId = 3 
+
+        const editedArray = product.map((item) => {
+            if(item.id === editedId) {
+                return {...item, name: "Apple"}
+            } else {
+                return item 
+            }
+        })
+
+        console.log(editedArray)
+
+        // const filterProduct = product.filter((item) => item.id !== deletedId)
+
+        // console.log('product', filterProduct);
+
+        // const filterArray =  product.filter((item) => item < 5)
+        // console.log(filterArray);
+        // console.log("Hello 1")
+        // console.log("Hello 1")
+        // console.log("Hello 1")
+        // for(let i = 0; i <= 1000; i++) {
+        //     console.log("Hello 4567890")
+        // }
+        // console.log("Hello 1")
+        // console.log("Hello 1")
+        // console.log("Hello 1")
+
+        let date = new Date()
+        console.log(date.getTime())
         // let details = {
         //     firstName: "rahul",
         //     lastName: "patel"

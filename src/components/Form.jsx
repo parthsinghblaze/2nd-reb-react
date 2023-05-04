@@ -15,11 +15,16 @@ function Form() {
     setCity,
     setTableData,
     tableData,
+    isEdit,
+    handleEdit,
   } = useContext(WrapperContext);
 
   function handleSubmit(e) {
     e.preventDefault();
-    const formValue = { firstName, lastName, city };
+
+    const date = new Date();
+
+    const formValue = { id: date.getTime(), firstName, lastName, city };
     setTableData([...tableData, formValue]);
 
     setFirstName("");
@@ -60,9 +65,15 @@ function Form() {
                 onChange={(e) => setCity(e.target.value)}
               />
             </div>
-            <button onClick={handleSubmit} className="btn btn-primary">
-              Add
-            </button>
+            {isEdit ? (
+              <button className="btn btn-warning" onClick={handleEdit}>
+                Edit
+              </button>
+            ) : (
+              <button onClick={handleSubmit} className="btn btn-primary">
+                Add
+              </button>
+            )}
           </form>
         </div>
       </div>

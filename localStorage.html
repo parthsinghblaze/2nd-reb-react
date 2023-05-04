@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        const array = [
+            {
+                id: 1,
+                name: 'xyz'
+            },
+            {
+                id: 2,
+                name: 'abc'
+            },
+            {
+                id: 3,
+                name: 'def'
+            },
+            {
+                id: 4,
+                name: 'pqr'
+            },
+            {
+                id: 5,
+                name: 'mno'
+            },
+        ] 
+
+        let obj =  {
+                id: 1,
+                name: 'xyz'
+            }
+
+        localStorage.setItem("array", JSON.stringify(array))
+        // localStorage.setItem("array", "parth")
+
+        const userName = localStorage.getItem("array")
+        console.log(JSON.parse(userName))
+    </script>
+</body>
+</html>
