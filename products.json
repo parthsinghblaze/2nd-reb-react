@@ -1,0 +1,24 @@
+{
+    "products": [
+        {
+            "product_name": "Sumsung Galaxy S13",
+            "category_name": "Mobile",
+            "price": 18000
+        },
+        {
+            "product_name": "LG TV",
+            "category_name": "TV",
+            "price": 18000
+        },
+        {
+            "product_name": "Nokia S11",
+            "category_name": "Mobile",
+            "price": 1000
+        },
+        {
+            "product_name": "MI S13",
+            "category_name": "Mobile",
+            "price": 14000
+        }
+    ]
+}

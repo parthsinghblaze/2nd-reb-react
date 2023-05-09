@@ -27,6 +27,11 @@ function Form() {
     const formValue = { id: date.getTime(), firstName, lastName, city };
     setTableData([...tableData, formValue]);
 
+    localStorage.setItem(
+      "tableData",
+      JSON.stringify([...tableData, formValue])
+    );
+
     setFirstName("");
     setLastName("");
     setCity("");

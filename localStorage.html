@@ -9,39 +9,73 @@
 <body>
     <script>
 
-        const array = [
-            {
-                id: 1,
-                name: 'xyz'
-            },
-            {
-                id: 2,
-                name: 'abc'
-            },
-            {
-                id: 3,
-                name: 'def'
-            },
-            {
-                id: 4,
-                name: 'pqr'
-            },
-            {
-                id: 5,
-                name: 'mno'
-            },
-        ] 
+        let jsonData = `
+        {
+    "products": [
+        {
+            "product_name": "Sumsung Galaxy S13",
+            "category_name": "Mobile",
+            "price": 18000
+        },
+        {
+            "product_name": "LG TV",
+            "category_name": "TV",
+            "price": 18000
+        },
+        {
+            "product_name": "Nokia S11",
+            "category_name": "Mobile",
+            "price": 1000
+        },
+        {
+            "product_name": "MI S13",
+            "category_name": "Mobile",
+            "price": 14000
+        }
+    ]
+}
+        
+        `
 
-        let obj =  {
-                id: 1,
-                name: 'xyz'
-            }
+        // console.log('jsonData', jsonData);
+        // to object 
+        const objectData = JSON.parse(jsonData)
+        console.log('object data', objectData);
+        // to string
+        console.log(JSON.stringify(objectData))
+        // const array = [
+        //     {
+        //         id: 1,
+        //         name: 'xyz'
+        //     },
+        //     {
+        //         id: 2,
+        //         name: 'abc'
+        //     },
+        //     {
+        //         id: 3,
+        //         name: 'def'
+        //     },
+        //     {
+        //         id: 4,
+        //         name: 'pqr'
+        //     },
+        //     {
+        //         id: 5,
+        //         name: 'mno'
+        //     },
+        // ] 
 
-        localStorage.setItem("array", JSON.stringify(array))
-        // localStorage.setItem("array", "parth")
+        // let obj =  {
+        //         id: 1,
+        //         name: 'xyz'
+        //     }
 
-        const userName = localStorage.getItem("array")
-        console.log(JSON.parse(userName))
+        // localStorage.setItem("array", JSON.stringify(array))
+        // // localStorage.setItem("array", "parth")
+
+        // const userName = localStorage.getItem("array")
+        // console.log(JSON.parse(userName))
     </script>
 </body>
 </html>

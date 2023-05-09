@@ -2,14 +2,23 @@ import { createContext, useState } from "react";
 import Form from "./components/Form";
 import Table from "./components/Table";
 
-export const WrapperContext = createContext()
+export const WrapperContext = createContext();
+
+function getLocalStorageData() {
+  const tableData = localStorage.getItem('tableData')
+  if(tableData) {
+    return JSON.parse(tableData)
+  } else {
+    return []
+  }
+}
 
 function App() {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [city, setCity] = useState("");
-  const [tableData, setTableData] = useState([])
+  const [tableData, setTableData] = useState(getLocalStorageData())
 
   // for editing 
   const [isEdit, setIsEdit] = useState(false)
@@ -17,6 +26,7 @@ function App() {
 
   function deleteData(id) {
     const filterData = tableData.filter((item) => item.id !== id)
+    localStorage.setItem('tableData', JSON.stringify(filterData));
     setTableData(filterData);
   }
 
@@ -48,6 +58,7 @@ function App() {
     setEditId(null)
 
     setTableData(editItems);
+    localStorage.setItem('tableData', JSON.stringify(editItems));
   }
 
   return (
@@ -59,19 +70,3 @@ function App() {
 }
 
 export default App;
-
-
-// first name, last name, city 
-
-// [
-//   {
-//     firstName: "",
-//     lastName: "",
-//     city: ""
-//   },
-//   {
-//     firstName: "",
-//     lastName: "",
-//     city: ""
-//   }
-// ]
