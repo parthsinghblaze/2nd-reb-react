@@ -1,14 +1,20 @@
-import { useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./component/Navbar";
+import CounterPage from "./pages/CounterPage";
+import Home from './pages/Home'
+import Product from "./pages/Product";
+import "./style.css"
 
 function App() {
-
-  const { number, userName } = useSelector((state) =>  state.counter);
-  useSelector((state) => console.log(state));
   return (
-    <div className="container">
-      <h1>Hey Redux</h1>
-      <h1>{number}</h1>
-    </div>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/counter" element={<CounterPage />} />
+        <Route path="/product" element={<Product />} />
+      </Routes>
+    </>
   );
 }
 
