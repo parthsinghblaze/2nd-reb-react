@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 function Navbar() {
+  const { carts } = useSelector((state) => state.product);
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -20,10 +24,13 @@ function Navbar() {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div
+            className="collapse navbar-collapse d-flex justify-content-between px-5"
+            id="navbarNav"
+          >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link active" aria-current="page" to="/">
+                <NavLink className="nav-link" aria-current="page" to="/">
                   Home
                 </NavLink>
               </li>
@@ -38,6 +45,24 @@ function Navbar() {
                 </NavLink>
               </li>
             </ul>
+            <NavLink className="nav-link position-relative" to="/cart">
+              <AiOutlineShoppingCart />
+              <span
+                class="position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle"
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontWeight: 800,
+                  color: "white",
+                  fontSize: "10px",
+                }}
+              >
+                <span>{carts.length}</span>
+              </span>
+            </NavLink>
           </div>
         </div>
       </nav>
