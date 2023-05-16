@@ -44,11 +44,21 @@ function Navbar() {
                   Product
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink to="/add-product" className="nav-link">
+                  Add Product
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/view-product" className="nav-link">
+                  View Product
+                </NavLink>
+              </li>
             </ul>
             <NavLink className="nav-link position-relative" to="/cart">
               <AiOutlineShoppingCart />
               <span
-                class="position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle"
+                className="position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle"
                 style={{
                   width: "20px",
                   height: "20px",
