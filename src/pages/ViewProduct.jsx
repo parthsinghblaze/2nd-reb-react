@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../redux/apiProduct";
+import { deleteProduct, getAllProducts } from "../redux/apiProduct";
 
 function ViewProduct() {
   const dispatch = useDispatch();
@@ -38,7 +38,12 @@ function ViewProduct() {
                 <td> {category} </td>
                 <td>
                   <button className="btn btn-warning">Edit</button>
-                  <button className="btn btn-danger">Delete</button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => dispatch(deleteProduct(_id))}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             );
