@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
 function Navbar() {
   const { carts } = useSelector((state) => state.product);
-
+  const location = useLocation();
+  if (location.pathname === "/login") {
+    return null;
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">

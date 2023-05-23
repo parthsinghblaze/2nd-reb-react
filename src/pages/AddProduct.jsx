@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { createProduct } from "../redux/apiProduct";
+import React, { useEffect, useState } from "react";
+import { createProduct, updateProduct } from "../redux/apiProduct";
 import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const initialValues = {
   name: "",
@@ -20,6 +20,11 @@ function AddProduct() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [initialFormValue, setInitialFormValue] = useState(initialValues);
+
+  const { id } = useParams();
+  const location = useLocation();
+  console.log("location", location);
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
     category: Yup.string().required("Category is required"),
@@ -30,29 +35,43 @@ function AddProduct() {
     price: Yup.number().required("Price is required"),
   });
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    // const formValue = { name, qty, category, price };
-    // dispatch(createProduct(formValue));
-  }
+  useEffect(() => {
+    console.log("Component mounted");
+    if (id) {
+      setInitialFormValue(location.state);
+    } else {
+      setInitialFormValue(initialValues);
+    }
+  }, [location]);
+
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   // const formValue = { name, qty, category, price };
+  //   // dispatch(createProduct(formValue));
+  // }
 
   function handleSubmit(values) {
     const { name, qty, category, price } = values;
     const formValue = { name, qty, category, price };
 
-    dispatch(createProduct({ formValue, navigate }));
+    if (id) {
+      dispatch(updateProduct({ id, formValue, navigate }));
+    } else {
+      dispatch(createProduct({ formValue, navigate }));
+    }
   }
 
   return (
     <div className="container moveUpAnimation">
-      <h5>Add Products</h5>
+      <h5> {id ? "Edit Product" : "Add Products"} </h5>
       <div className="row">
         <div className="col-md-6 offset-md-3 p-3 shadow my-5">
           {/* FORMIK */}
           <Formik
-            initialValues={initialValues}
+            initialValues={initialFormValue}
             onSubmit={handleSubmit}
             validationSchema={validationSchema}
+            enableReinitialize={true}
           >
             {() => {
               return (
@@ -101,7 +120,11 @@ function AddProduct() {
                       component="div"
                     />
                   </div>
-                  <button className="btn btn-success">Submit</button>
+                  {id ? (
+                    <button className="btn btn-warning">Update</button>
+                  ) : (
+                    <button className="btn btn-success">Submit</button>
+                  )}
                 </Form>
               );
             }}

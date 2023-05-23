@@ -1,15 +1,23 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getAllProducts } from "../redux/apiProduct";
+import { useNavigate } from "react-router-dom";
 
 function ViewProduct() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { loading, apiProduct } = useSelector((state) => state.apiProduct);
+  const { loading, apiProduct, error } = useSelector(
+    (state) => state.apiProduct
+  );
 
   useEffect(() => {
     dispatch(getAllProducts());
   }, []);
+
+  if (error) {
+    return <h1>Some thing went wrong!</h1>;
+  }
 
   return (
     <div className="container">
@@ -37,7 +45,14 @@ function ViewProduct() {
                 <td> {price} </td>
                 <td> {category} </td>
                 <td>
-                  <button className="btn btn-warning">Edit</button>
+                  <button
+                    className="btn btn-warning"
+                    onClick={() =>
+                      navigate(`/edit-product/${_id}`, { state: item })
+                    }
+                  >
+                    Edit
+                  </button>
                   <button
                     className="btn btn-danger"
                     onClick={() => dispatch(deleteProduct(_id))}

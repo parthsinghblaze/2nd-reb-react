@@ -2,17 +2,23 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getAllProducts = createAsyncThunk('apiProduct/getAllProducts' , async (data, {dispatch} ) => {
+
     try {
-        // dispatch(startLoading())
+        dispatch(setErrorFalse())
         const response = await axios.get(`http://localhost:8000/product/products`)
+        console.log('response', response);
         if(response.status === 200) {
             // dispatch(stopLoading())
             // dispatch(setProduct(response.data.data.products))
             return response.data.data.products
         }
+        
     } catch (error) {
         // dispatch(stopLoading())
-        console.log(error)
+       if(error.code === 'ERR_NETWORK') {
+        alert("Server Issue")
+        dispatch(setErrorTrue());
+        }
     }
 })
 
@@ -31,13 +37,27 @@ export const createProduct = createAsyncThunk('apiProduct/createProduct', async 
 
 export const deleteProduct = createAsyncThunk('apiProduct/deleteProduct', async (id, { dispatch }) => {
     try {
+        
         const response = await axios.delete(`http://localhost:8000/product/${id}`)
         console.log(response);
         if(response.status === 200) {
             dispatch(getAllProducts())
         }
     } catch (error) {
-        console.log(error);
+        alert("Some thing went wrong!");
+    }
+})
+
+export const updateProduct = createAsyncThunk('apiProduct/deleteProduct', async ({id, formValue, navigate}, { dispatch }) => {
+    try {
+        
+        const response = await axios.patch(`http://localhost:8000/product/${id}`, formValue)
+        console.log(response);
+        if(response.status === 200) {
+            navigate('/view-product')
+        }
+    } catch (error) {
+        alert("Some thing went wrong!");
     }
 })
 
@@ -45,7 +65,8 @@ const apiProductSlice = createSlice({
     name: 'apiProduct',
     initialState: {
         loading: true,
-        apiProduct: []
+        apiProduct: [],
+        error: false,
     },
     reducers: {
         startLoading: (state, action) => {
@@ -56,6 +77,12 @@ const apiProductSlice = createSlice({
         },
         setProduct: (state, action) => {
             state.apiProduct = action.payload
+        },
+        setErrorTrue: (state, action) => {
+            state.error = true;
+        },
+        setErrorFalse: (state, action) => {
+            state.error =  false;
         }
     },
     extraReducers: {
@@ -68,10 +95,11 @@ const apiProductSlice = createSlice({
         },
         [getAllProducts.rejected]: (state, action) => {
             state.loading = false;
+            state.apiProduct = [];
         }
     }
 })
 
-export const  { startLoading, stopLoading, setProduct } = apiProductSlice.actions
+export const  { startLoading, stopLoading, setProduct, setErrorTrue, setErrorFalse } = apiProductSlice.actions
 
 export default apiProductSlice.reducer
