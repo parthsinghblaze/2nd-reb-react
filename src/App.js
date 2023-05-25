@@ -7,6 +7,7 @@ import "./style.css"
 import AddProduct from "./pages/AddProduct";
 import ViewProduct from "./pages/ViewProduct";
 import PrivateRoute from "./component/PrivateRoute";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
       </Routes>
       </PrivateRoute>
       <Routes>
-        <Route path="/login" element={<h1>Login</h1>} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );

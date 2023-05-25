@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/authSlice";
 
 function Navbar() {
   const { carts } = useSelector((state) => state.product);
+  const { isLogin } = useSelector((state) => state.auth);
   const location = useLocation();
+  const dispatch = useDispatch();
   if (location.pathname === "/login") {
     return null;
   }
@@ -58,24 +61,35 @@ function Navbar() {
                 </NavLink>
               </li>
             </ul>
-            <NavLink className="nav-link position-relative" to="/cart">
-              <AiOutlineShoppingCart />
-              <span
-                className="position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle"
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontWeight: 800,
-                  color: "white",
-                  fontSize: "10px",
-                }}
-              >
-                <span>{carts.length}</span>
-              </span>
-            </NavLink>
+            <div className="d-flex gap-4">
+              {isLogin && (
+                <span
+                  className="badge bg-danger cursor-pointer"
+                  onClick={() => dispatch(logout())}
+                >
+                  {" "}
+                  Logout{" "}
+                </span>
+              )}
+              <NavLink className="nav-link position-relative" to="/cart">
+                <AiOutlineShoppingCart />
+                <span
+                  className="position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle"
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontWeight: 800,
+                    color: "white",
+                    fontSize: "10px",
+                  }}
+                >
+                  <span>{carts.length}</span>
+                </span>
+              </NavLink>
+            </div>
           </div>
         </div>
       </nav>
